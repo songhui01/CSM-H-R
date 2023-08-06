@@ -2,4 +2,5 @@
 A Context Modeling Framework in Supporting Reasoning Automation of Interoperable Intelligent Systems and Privacy Protection
 
 CSM-H-R: Hierachical-Context-Core-Model-Full-Version
-![image](https://github.com/songhui-syue2/CSM-H-R/assets/12132911/778def9c-9af4-40e8-af63-b0d4627460ec)
+![image](https://github.com/songhui01/CSM-H-R/assets/12132911/5c21811c-6865-4679-89db-e2a558435f1e)
+
