@@ -1,0 +1,22 @@
+1) file transforming from string to json to class to object and verse vice.
+
+2)Using object to generate a casm.
+How?
+
+using matrix to represent a casm, create a matrix class
+
+object to machine; machine to tables; tables to machine;
+
+3)storing, updating,
+
+4)interface for predicating function
+
+5)easy to check whether there is a transition or not. And how is the transition.
+
+We can record the transition condition or effects or the screenshot of the transition.
+The function can be added later in next version, and the results can be used for data mining purpose.
+
+
+6)from class diagram to database tables, and store the matrix in context attribute table
+ 
+
