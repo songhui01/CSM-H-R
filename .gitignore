@@ -3,3 +3,4 @@ temp/
 config
 dataFile*
 library
+*.class
