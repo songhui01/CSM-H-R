@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import context.core.ContextDomain;
+import context.utility.measurement.ObjectSizeCalculator;
 
 public class BoomWithTripleListCASMhr {
 	public static void main(String args[]) throws JSONException, IOException{
@@ -38,6 +39,11 @@ public class BoomWithTripleListCASMhr {
 
 		cd=AssembleCSMs.assembleCASMhr(a, cd);
 		//cd=AssembleCSMs.assembleCASMCSSM(a, cd);
+                
+                // test the memory size
+                // ObjectSizeCalculator osi = new ObjectSizeCalculator();
+                long size = ObjectSizeCalculator.getObjectSize(cd);
+                System.out.println("Size of the object: " + size + " bytes");
 
 		Instant end = Instant.now();
 		

@@ -23,7 +23,7 @@ public class DomainInitialization {
 		if(!file.exists()){
 			file.mkdirs();
 		}
-		try (FileWriter fileWriter = new FileWriter("dataFiles/casmfile_domain_"+5+".json")) {
+		try (FileWriter fileWriter = new FileWriter("dataFiles/casmfile_domain_"+4+".json")) {
 			fileWriter.write(json);
 			System.out.println("Successfully Copied JSON Object to File...");
 		}

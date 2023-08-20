@@ -8,7 +8,7 @@ package context.core;
  *
  * @author songhuiyue
  */
-public class Ontology {
+public class Ontology extends Object{
     
     protected String type;
     protected String name;

@@ -7,7 +7,7 @@ import org.json.JSONException;
 import context.csmGenerationEngine.CSMUpdater;
 import context.predication.DecisionProbability;
 
-public class VariousProbabilitiesUtl {
+public class VariousProbabilitiesUtil {
 	public static void main(String args[]) throws JSONException, IOException{
 		/*JSONObject obj = JasonReader.readJson("config/fromWearableDeviceSystemToCSMCloudServer.json");
 		String domainId = obj.getString("domainId");
@@ -23,7 +23,7 @@ public class VariousProbabilitiesUtl {
 		*/
 		int start = 1; //start state of the transition
 		int end = 2; //end state of the transition
-		int domainId = 1;
+		String domainId = "4";
 		DecisionProbability decisionProbability = new DecisionProbability();
 		double d = decisionProbability.getProbabilityByTransition(start, end, domainId);
 		System.out.println(d);

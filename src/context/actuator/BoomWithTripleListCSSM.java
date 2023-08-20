@@ -56,7 +56,7 @@ public class BoomWithTripleListCSSM {
 		String json = ow.writeValueAsString(cd);
 		//System.out.print(json);
 		new File("dataFiles").mkdir();
-		try (FileWriter fileWriter = new FileWriter("datafiles/casmfile_domain_"+5+".json")) {//cd.getDomainId()
+		try (FileWriter fileWriter = new FileWriter("datafiles/casmfile_domain_"+4+".json")) {//cd.getDomainId()
 			fileWriter.write(json);
 			System.out.println("In CSSM, Successfully Copied JSON Object to File...");
 		}

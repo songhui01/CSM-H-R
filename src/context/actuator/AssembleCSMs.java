@@ -80,7 +80,7 @@ public class AssembleCSMs {
 			//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 			//TODO: add check to the json file that the two attributes can not be null
 			co = new ContextObject(o.getJSONObject("subject").getString("subjectName"), 
-                                o.getJSONObject("subject").getString("type"), 
+                                o.getJSONObject("subject").getString("subjectType"), 
 					o.getJSONObject("subject").getString("subjectURI"));
 			int decision = "TAKE".equals(o.getJSONObject("decision").getString("decisionName"))?1:0;
 			
@@ -365,7 +365,7 @@ public class AssembleCSMs {
 						JSONObject o2 = a.getJSONObject(i);
 						//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 						//TODO: add check to the json file that the two attributes can not be null
-                                                System.out.println(o2.getJSONObject("state").getString("name"));
+                                                //System.out.println(o2.getJSONObject("state").getString("name"));
 						cas = new ContextAttributeState(o2.getJSONObject("state").getString("name"), 
 								o2.getJSONObject("state").getString("uri"));
 						
@@ -644,7 +644,7 @@ public class AssembleCSMs {
 			//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 			//TODO: add check to the json file that the two attributes can not be null
 			co = new ContextObject(o.getJSONObject("subject").getString("subjectName"), 
-                                o.getJSONObject("subject").getString("type"), 
+                                o.getJSONObject("subject").getString("subjectType"), 
 					o.getJSONObject("subject").getString("subjectURI"));
 			int decision = "TAKE".equals(o.getJSONObject("decision").getString("decisionName"))?1:0;
 

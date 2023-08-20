@@ -5,7 +5,7 @@ package context.core;
  * This class is used for Context situation state machine.
  * In a context object which contains CSSM, there is a list of the object of this class
  */
-public class ContextAttributeSnapshot {
+public class ContextAttributeSnapshot extends Ontology{
 	private String objectURI;
 	private String attributeURI; // it is actually mapped to object type: objectid.attributename
 	//. attribute and its value
