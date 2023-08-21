@@ -262,6 +262,10 @@ public class PersonActivityGenerator extends Generator{
                     } else if(person.getBloodSugarCondition().contains("Low") && originalRestaurant == null && originalPlace != "Home" 
                             && "location".equals(attribute.getName())) {
                         attribute.setType("decision");
+                    } else if ("occupationCondition".equals(attribute.getName()) || "sex".equals(attribute.getName())) {
+                        attribute.setType("Nominal");
+                    } else {
+                        attribute.setType("Ordinal");
                     }
 
                     state.setName(person.getStateNameByAttributeName(attributeList.get(i)));
@@ -270,7 +274,8 @@ public class PersonActivityGenerator extends Generator{
 
                     condition.setName("time");
                     condition.setTime(String.valueOf(hour));
-                    condition.setType("Raw");
+                    condition.setType("discrete"); // TODO: for timing, it can be discrete, or period, or continous, those values can be used to determine 
+                                                        // the properties of the value which help choose corresponding learning methods or transition methods
 
                     // only if old state and new state for an attribute are different, we add this record
                     if(person.getOldStates().containsKey(attribute.getName()) 
