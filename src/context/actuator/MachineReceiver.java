@@ -48,7 +48,7 @@ public class MachineReceiver {
 				FileLoader.proceedToNext();
 				while(FileLoader.currentWord.isEmpty()) FileLoader.proceedToNext();
 				String stateName = FileLoader.currentWord;
-				ContextAttributeState cas = new ContextAttributeState(attributeName, stateName);
+				ContextAttributeState cas = new ContextAttributeState(attributeName, stateName,"null");
 				//if casm exists, add a state and transition, if not, create one
 				if(queryCASM(attributeName)){
 					casm = loadCASM(attributeName);

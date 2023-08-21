@@ -110,7 +110,8 @@ public class AssembleCSMs {
 				//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 				//TODO: add check to the json file that the two attributes can not be null
 				cas = new ContextAttributeState(o2.getJSONObject("object").getString("objectName"), 
-						o2.getJSONObject("object").getString("objectURI"));
+						o2.getJSONObject("object").getString("objectURI"),
+                                                                o2.getJSONObject("object").getString("objectType"));
 				
 				Iterator it2 = ca.getContextAttributeStatesList()!=null?
 						ca.getContextAttributeStatesList().iterator():null;
@@ -174,7 +175,8 @@ public class AssembleCSMs {
 						//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 						//TODO: add check to the json file that the two attributes can not be null
 						cas = new ContextAttributeState(o2.getJSONObject("object").getString("objectName"), 
-								o2.getJSONObject("object").getString("objectURI"));
+								o2.getJSONObject("object").getString("objectURI"),
+                                                                o2.getJSONObject("object").getString("objectType"));
 						
 						Iterator it2 = ca.getContextAttributeStatesList()!=null?
 								ca.getContextAttributeStatesList().iterator():null;
@@ -302,7 +304,8 @@ public class AssembleCSMs {
 				//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 				//TODO: add check to the json file that the two attributes can not be null
 				cas = new ContextAttributeState(o2.getJSONObject("state").getString("name"), 
-						o2.getJSONObject("state").getString("uri"));
+						o2.getJSONObject("state").getString("uri"),
+                                                                o2.getJSONObject("state").getString("type"));
 				
 				Iterator it2 = ca.getContextAttributeStatesList()!=null?
 						ca.getContextAttributeStatesList().iterator():null;
@@ -352,22 +355,39 @@ public class AssembleCSMs {
 						Iterator it4=cotmp3.getCal()!=null?cotmp3.getCal().iterator():null;
 						ContextAttribute catmp;
 						int it4int=0, tag=0;
+                                                boolean found_attribute = false;
 						while(it4.hasNext()){
 							catmp = (ContextAttribute)it4.next();
 							if(catmp.getName().equals(o.getJSONObject("attribute").getString("name"))){
 								it4int=tag;
+                                                                found_attribute = true;
 							}
 							tag++;
 						}
-						ca=cotmp3.getCal().get(it4int);
-						
+                                                
+                                                if(found_attribute == true) {
+                                                    // if the context attribute is found to be at an index
+                                                    ca=cotmp3.getCal().get(it4int);
+                                                } else {
+                                                    //if the context attribute is not found anywhere, we will add a context attribute to the cal
+                                                    ca = new ContextAttribute(o.getJSONObject("attribute").getString("name"));
+                                                    ca.setUri(o.getJSONObject("attribute").getString("uri"));
+                                                    ca.setType(o.getJSONObject("attribute").getString("type"));
+                                                    cotmp3.getCal().add(ca);
+                                                    
+                                                    casm = new ContextAttributeStateMachine();
+                                                    cotmp3.addAttributeStateMachine(casm);
+                                                    it4int = cotmp3.getCal().size() - 1;
+                                                }
+                                                
 						//handle the context attribute state
 						JSONObject o2 = a.getJSONObject(i);
 						//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 						//TODO: add check to the json file that the two attributes can not be null
                                                 //System.out.println(o2.getJSONObject("state").getString("name"));
 						cas = new ContextAttributeState(o2.getJSONObject("state").getString("name"), 
-								o2.getJSONObject("state").getString("uri"));
+								o2.getJSONObject("state").getString("uri"), 
+                                                                o2.getJSONObject("state").getString("type"));
 						
 						Iterator it2 = ca.getContextAttributeStatesList()!=null?
 								ca.getContextAttributeStatesList().iterator():null;
@@ -546,7 +566,8 @@ public class AssembleCSMs {
 					//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 					//TODO: add check to the json file that the two attributes can not be null
 					cas = new ContextAttributeState(o2.getJSONObject("object").getString("objectName"), 
-							o2.getJSONObject("object").getString("objectURI"));
+							o2.getJSONObject("object").getString("objectURI"),
+                                                                o2.getJSONObject("object").getString("objectType"));
 					
 					Iterator it2 = ca.getContextAttributeStatesList()!=null?
 							ca.getContextAttributeStatesList().iterator():null;
@@ -682,7 +703,8 @@ public class AssembleCSMs {
 				//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 				//TODO: add check to the json file that the two attributes can not be null
 				cas = new ContextAttributeState(o2.getJSONObject("object").getString("objectName"), 
-						o2.getJSONObject("object").getString("objectURI"));
+						o2.getJSONObject("object").getString("objectURI"),
+                                                                o2.getJSONObject("object").getString("objectType"));
 				
 				Iterator it2 = ca.getContextAttributeStatesList()!=null?
 						ca.getContextAttributeStatesList().iterator():null;
@@ -813,7 +835,8 @@ public class AssembleCSMs {
 						//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 						//TODO: add check to the json file that the two attributes can not be null
 						cas = new ContextAttributeState(o2.getJSONObject("object").getString("objectName"), 
-								o2.getJSONObject("object").getString("objectURI"));
+								o2.getJSONObject("object").getString("objectURI"),
+                                                                o2.getJSONObject("object").getString("objectType"));
 						
 						Iterator it2 = ca.getContextAttributeStatesList()!=null?
 								ca.getContextAttributeStatesList().iterator():null;
@@ -888,7 +911,8 @@ public class AssembleCSMs {
 					//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 					//TODO: add check to the json file that the two attributes can not be null
 					cas = new ContextAttributeState(o2.getJSONObject("object").getString("objectName"), 
-							o2.getJSONObject("object").getString("objectURI"));
+							o2.getJSONObject("object").getString("objectURI"),
+                                                                o2.getJSONObject("object").getString("objectType"));
 					
 					Iterator it2 = ca.getContextAttributeStatesList()!=null?
 							ca.getContextAttributeStatesList().iterator():null;
@@ -1027,7 +1051,8 @@ public class AssembleCSMs {
 				//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 				//TODO: add check to the json file that the two attributes can not be null
 				cas = new ContextAttributeState(o2.getJSONObject("state").getString("name"), 
-						o2.getJSONObject("state").getString("uri"));
+						o2.getJSONObject("state").getString("uri"),
+                                                                o2.getJSONObject("state").getString("type"));
 				
 				Iterator it2 = ca.getContextAttributeStatesList()!=null?
 						ca.getContextAttributeStatesList().iterator():null;
@@ -1158,7 +1183,8 @@ public class AssembleCSMs {
 						//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 						//TODO: add check to the json file that the two attributes can not be null
 						cas = new ContextAttributeState(o2.getJSONObject("state").getString("name"), 
-								o2.getJSONObject("state").getString("uri"));
+								o2.getJSONObject("state").getString("uri"),
+                                                                o2.getJSONObject("state").getString("type"));
 						
 						Iterator it2 = ca.getContextAttributeStatesList()!=null?
 								ca.getContextAttributeStatesList().iterator():null;
@@ -1233,7 +1259,8 @@ public class AssembleCSMs {
 					//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 					//TODO: add check to the json file that the two attributes can not be null
 					cas = new ContextAttributeState(o2.getJSONObject("state").getString("name"), 
-							o2.getJSONObject("state").getString("uri"));
+							o2.getJSONObject("state").getString("uri"),
+                                                                o2.getJSONObject("state").getString("type"));
 					
 					Iterator it2 = ca.getContextAttributeStatesList()!=null?
 							ca.getContextAttributeStatesList().iterator():null;

@@ -12,9 +12,10 @@ public class ContextAttributeState extends Ontology{
 		
 	}
 	
-	public ContextAttributeState(String stateName, String stateURI){
+	public ContextAttributeState(String stateName, String stateURI, String stateType){
 		this.uri=stateURI;
 		this.name=stateName;
+		this.type=stateType;
 	}
 	
 	public float getPossibility(ContextAttributeState current, ContextAttributeState target){

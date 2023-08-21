@@ -17,6 +17,7 @@ public class ContextAttributeStateMachine{
 	private Matrixes matrixes = new Matrixes(); //use this structure to store the core data; matrix for state transitions, and matrix for prediction
 	//private ContextAttribute ca = new ContextAttribute(); //contains context attribute name and a list of states
 	private HashMap<String, Integer> hmstates = new HashMap<String, Integer>(); //a key value map  like (home, 1); ##the string here can be extended(replaced) using the state class
+                                                                                    // suppose the home index is 1, then (home, 1);
 	private HashMap<String, Integer> hmdecisions = new HashMap<String, Integer>(); //a key value map  like (take, 1)
 	private int currentState = -1; //initial value is -1
 	private String lastTransition; //a string string map  like (coffee shop, home, "01")
