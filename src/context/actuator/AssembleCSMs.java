@@ -19,6 +19,12 @@ import context.core.ContextSituationState;
 import context.core.ContextSituationStateMachine;
 import context.utility.ListHelper;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 
  * @author songhuiyue
@@ -230,7 +236,30 @@ public class AssembleCSMs {
 		return cd;
 	}
         
+        public static String append(String compressed, String s) {
+            return compressed.concat(".").concat(s);
+        }
         
+        public static void printListToFile(List<String> lines, String filePath) {
+            try {
+                // Create a FileWriter with the file path
+                FileWriter fileWriter = new FileWriter(filePath);
+
+                // Write each line to the file
+                for (String line : lines) {
+                    fileWriter.write(line + "\n");
+                }
+
+                // Close the FileWriter
+                fileWriter.close();
+
+                System.out.println("Lines written to file successfully.");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 	public static ContextDomain assembleCASMhr(JSONArray a, ContextDomain cd) throws JSONException{
 		
 		//handle contextObject, ContextAttributeStateMachine List and ContextAttribute List
@@ -239,6 +268,8 @@ public class AssembleCSMs {
 		ContextObject co;
 		ContextAttribute ca;
 		ContextAttributeState cas;
+                String compressed = "";
+                List<String> compressedList = new ArrayList<String>();
 		
 		for (int i = 0; i < a.length(); i++) {
 			//handle context object
@@ -253,14 +284,17 @@ public class AssembleCSMs {
 			ContextCategory cotmpcc = new ContextCategory();
 			String subjectTypeCategoryName = o.getJSONObject("object").getString("type");
 			Iterator it1;
+                        int category_index = 0;
 			while(itcc.hasNext()){
 				cotmpcc = (ContextCategory)itcc.next();
 				if(subjectTypeCategoryName.equals(cotmpcc.getName())){
 					//then find the object in this category and update it
 					cc = cotmpcc;
 					bcc = false;
+                                        compressed = append(compressed, String.valueOf(category_index));
                                         break;
 				}
+                                category_index++;
 			}
 			
 			if(bcc==true){
@@ -290,7 +324,10 @@ public class AssembleCSMs {
 				cd.getCol_domain().add(co.getUri());//this is to add new object in context domain
 				cd.getCr().getrMatrixes().addState(0);
 				cc.addContextObject(co);
-				
+                                
+                                // object index is 0
+				compressed = append(compressed, String.valueOf(0));
+                                
 				//then the context attribute will be very new and its the type in the object
 				//???so context object is a real object but context attribute is a concept
 				//???how to draw in uml class diagram need to be considered
@@ -346,12 +383,16 @@ public class AssembleCSMs {
 				Iterator it3 = cc.getCol().iterator();
 				boolean b3 = false; // new object
 				ContextObject cotmp3 = new ContextObject();
+                                int object_index = 0;
 				while(it3.hasNext()){
 					cotmp3 = (ContextObject)it3.next();
 					if(cotmp3.getUri().equals(co.getUri())){
 						//found the object and update it
 						//TODO: Did not handle context attribute here
 						//ca = new ContextAttribute(o.getJSONObject("object").getString("objectType"));
+                                                
+                                                compressed = append(compressed, String.valueOf(object_index));
+                                                
 						Iterator it4=cotmp3.getCal()!=null?cotmp3.getCal().iterator():null;
 						ContextAttribute catmp;
 						int it4int=0, tag=0;
@@ -380,6 +421,9 @@ public class AssembleCSMs {
                                                     it4int = cotmp3.getCal().size() - 1;
                                                 }
                                                 
+                                                // attribute index
+                                                compressed = append(compressed, String.valueOf(it4int));
+
 						//handle the context attribute state
 						JSONObject o2 = a.getJSONObject(i);
 						//System.out.println(o.getJSONObject("subject").getString("subjectName"));
@@ -393,17 +437,26 @@ public class AssembleCSMs {
 								ca.getContextAttributeStatesList().iterator():null;
 						boolean b2 = false; // new object state
 						ContextAttributeState castmp = new ContextAttributeState();
+                                                
+                                                int state_index = 0;
 						while(it2!=null&&it2.hasNext()){
 							castmp = (ContextAttributeState)it2.next();
 							if(castmp.getUri().equals(cas.getUri())){
 								b2=true; // already has the object state
+                                                                break;
 							}
+                                                        state_index++;
 						}
 						
 						if(!b2){
 							//System.out.println("this is the place 1");
 							ca.addContextAttributeStateToList(cas);
+                                                        state_index = ca.getContextAttributeStatesList().size() - 1;
 						}
+                                                
+                                                // state index
+                                                compressed = append(compressed, String.valueOf(it4int));
+                                                
 						//cotmp3.addContextAttribute(ca);
 						//the context attribute state machine will be very new too
 						casm = cotmp3.getCasml().get(it4int);
@@ -431,13 +484,19 @@ public class AssembleCSMs {
 						}
 						//cotmp3.addAttributeStateMachine(casm);
 					}
+                                        object_index++;
 				}
 			}
 			
 			//handle context attribute list
-			
+                        
+                        //handle compression
+                        compressedList.add(compressed);
+                        compressed = "";
 		}
-		
+                
+		printListToFile(compressedList, "dataFiles/compressed.txt");
+                
 		return cd;
 	}
 	

@@ -83,7 +83,8 @@ public class CSMUpdaterFromObject {
 				//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 				//TODO: add check to the json file that the two attributes can not be null
 				cas = new ContextAttributeState(o2.getJSONObject("object").getString("objectName"), 
-						o2.getJSONObject("object").getString("objectURI"));
+						o2.getJSONObject("object").getString("objectURI"),
+                                        o2.getJSONObject("object").getString("objectType"));
 				
 				Iterator it2 = ca.getContextAttributeStatesList()!=null?
 						ca.getContextAttributeStatesList().iterator():null;
@@ -144,7 +145,8 @@ public class CSMUpdaterFromObject {
 						//System.out.println(o.getJSONObject("subject").getString("subjectName"));
 						//TODO: add check to the json file that the two attributes can not be null
 						cas = new ContextAttributeState(o2.getJSONObject("object").getString("objectName"), 
-								o2.getJSONObject("object").getString("objectURI"));
+								o2.getJSONObject("object").getString("objectURI"),
+                                        o2.getJSONObject("object").getString("objectType"));
 						
 						Iterator it2 = ca.getContextAttributeStatesList()!=null?
 								ca.getContextAttributeStatesList().iterator():null;
