@@ -52,7 +52,7 @@ public class RandomGenerator {
 		TimeHelper th = new TimeHelper("17-Jan-18 02:10:15");
 		PersonHelper50 ph = new PersonHelper50();
 		Instant start = Instant.now();
-		for(int i=0; i<1000; i++){
+		for(int i=0; i<1000000; i++){
 			Iterator<String> it = ph.getNextPerson().iterator();
 			//String[] s= randomLocation();
 			 writer.write(i 					//whole ID

@@ -18,8 +18,8 @@ import context.core.ContextDomain;
 public class BoomWithTripleListCSSM {
 	public static void main(String args[]) throws JSONException, IOException{
 		//init domain
-                //DomainInitialization.init();
-                //RelationshipRegistration.register();
+                DomainInitialization.init(4);
+                RelationshipRegistration.register();
                 
 		JSONObject obj = JasonReader.readJson("config/samplefile2.json");
 		JSONArray a = obj.getJSONArray("infoList");

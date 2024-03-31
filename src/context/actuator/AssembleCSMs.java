@@ -18,12 +18,14 @@ import context.core.ContextObject;
 import context.core.ContextSituationState;
 import context.core.ContextSituationStateMachine;
 import context.utility.ListHelper;
+import context.utility.ObjectPrinter;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * 
@@ -1183,7 +1185,7 @@ public class AssembleCSMs {
 					cotmp3 = (ContextObject)it3.next();
 					if(cotmp3.getUri().equals(co.getUri())){
 						//found the object and update it
-						
+						//System.out.println("now the object is : " + cotmp3.getName());
 						//handle CSSM
 						ContextSituationState css1= new ContextSituationState();
 						String objectURI = o.getJSONObject("subject").getString("subjectURI");
@@ -1209,6 +1211,7 @@ public class AssembleCSMs {
 								//then the relation is good enough, we add the current state of this object
 								String thisObject = cd.getCol_domain().get(ii);
 								Iterator itSS1 = cd.getCcl().iterator();
+                                                                //System.out.println("now the object index is : " + thisObject); // or print index;
 								while(itSS1.hasNext()){
 									ContextCategory ccSS1 = (ContextCategory)itSS1.next();
 									Iterator itSS2 = ccSS1.getCol().iterator();
@@ -1227,9 +1230,16 @@ public class AssembleCSMs {
 												//here the state should be the URI not the name
 												if(!ListHelper.inTheSnapshotList(casnap4, css1.getContextAttributeSnapshotList())){
 													css1.addContextAttributeSnapshotToList(casnap4);
+                                                                                                        //System.out.println(casnap4.getAttributeURI());
 												}
 											}
 										}
+//                                                                                try {
+//                                                                                    ObjectPrinter.prettyPrint(css1);
+//                                                                                } catch (Exception e) {
+//                                                                                    // Handle the exception here
+//                                                                                    e.printStackTrace(); // Print the exception stack trace for debugging
+//                                                                                }
 									}
 								}
 							}
@@ -1238,6 +1248,7 @@ public class AssembleCSMs {
 						if(existAndIndex>-1){ //existing, so we just have the index, and use the index to set current
 							//casm.getMatrixes().updateHmStates(casm.getCurrentState(), col);
 							//casm.getMatrixes().updateDecisionMatrixStates(casm.getCurrentState(), col, decision); //row, column, decision
+                                                        //System.out.println("exist and return index");
 							cotmp3.getCssm().getSmatrixes().updateHmStates(cotmp3.getCssm().getCurrentState(), existAndIndex);
 							cotmp3.getCssm().getSmatrixes().updateDecisionMatrixStates(cotmp3.getCssm().getCurrentState(), existAndIndex, decision);
 							cotmp3.getCssm().setCurrentState(existAndIndex);
@@ -1250,8 +1261,14 @@ public class AssembleCSMs {
 							cotmp3.getCssm().setCurrentState(currentIndex);
 						}
 						
+//                                                try {
+//                                                    ObjectPrinter.prettyPrint(cotmp3);
+//                                                } catch (Exception e) {
+//                                                    // Handle the exception here
+//                                                    e.printStackTrace(); // Print the exception stack trace for debugging
+//                                                }
 
-						//after mainly handly CSSM
+						//after mainly handling CSSM
 						Iterator it4=cotmp3.getCal()!=null?cotmp3.getCal().iterator():null;
 						ContextAttribute catmp;
 						int it4int=0, tag=0;
@@ -1320,15 +1337,15 @@ public class AssembleCSMs {
 			
 			Iterator it3 = cc.getCol().iterator();
 			boolean b3 = false; // new object
-			ContextObject cotmp3 = new ContextObject();
+			ContextObject cotmp4 = new ContextObject();
 
 
 			while(it3.hasNext()){
-				cotmp3 = (ContextObject)it3.next();
-				if(cotmp3.getUri().equals(co.getUri())){
+				cotmp4 = (ContextObject)it3.next();
+				if(cotmp4.getUri().equals(co.getUri())){
 					//found the object and use it
 					//we get the current attribute URI, and the current state URI, and the object URI
-					Iterator it4=cotmp3.getCal()!=null?cotmp3.getCal().iterator():null;
+					Iterator it4=cotmp4.getCal()!=null?cotmp4.getCal().iterator():null;
 					ContextAttribute catmp;
 					int it4int=0, tag=0;
 					while(it4.hasNext()){
@@ -1338,7 +1355,7 @@ public class AssembleCSMs {
 						}
 						tag++;
 					}
-					ca=cotmp3.getCal().get(it4int);
+					ca=cotmp4.getCal().get(it4int);
 					
 					//handle the context attribute state
 					JSONObject o2 = a.getJSONObject(i);
@@ -1363,9 +1380,9 @@ public class AssembleCSMs {
 						//System.out.println("this is the place 1");
 						ca.addContextAttributeStateToList(cas);
 					}
-					//cotmp3.addContextAttribute(ca);
+					//cotmp4.addContextAttribute(ca);
 					//the context attribute state machine will be very new too
-					casm = cotmp3.getCasml().get(it4int);
+					casm = cotmp4.getCasml().get(it4int);
 					//casm.setCa(ca);
 					
 					int col = 0;//used to note the incoming state and for the parameter of matrix
@@ -1388,7 +1405,7 @@ public class AssembleCSMs {
 						casm.getMatrixes().addStateForDeicision(casm.getCurrentState(),decision);
 						casm.setCurrentState(size); 
 					}
-					//cotmp3.addAttributeStateMachine(casm);
+					//cotmp4.addAttributeStateMachine(casm);
 				}
 			}
 			//handle context attribute list
