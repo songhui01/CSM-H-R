@@ -12,9 +12,11 @@ import context.convertion.AttributeHR;
 import context.convertion.StateHR;
 import context.convertion.TripleHR;
 import context.convertion.UpperLevelInfo;
+import context.core.granularity.TimeGranularity;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.FileWriter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -274,6 +276,7 @@ public class PersonActivityGenerator extends Generator{
 
                     condition.setName("time");
                     condition.setTime(String.valueOf(hour));
+                    condition.setGranularity(TimeGranularity.HOUR);
                     condition.setType("discrete"); // TODO: for timing, it can be discrete, or period, or continous, those values can be used to determine 
                                                         // the properties of the value which help choose corresponding learning methods or transition methods
 
@@ -308,7 +311,7 @@ public class PersonActivityGenerator extends Generator{
     }
 
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, IOException, NoSuchFieldException {
-        int number_students = 200; // Number of random students to generate
+        int number_students = 2000; // Number of random students to generate
         int number_professors = 500;
         
         int number_of_types_of_person = 6300;
@@ -380,10 +383,10 @@ public class PersonActivityGenerator extends Generator{
         String json = ow.writeValueAsString(uli);
         //System.out.print(json);
 
-        try (PrintWriter out = new PrintWriter("config/samplefile3.json")) {
+        try (PrintWriter out = new PrintWriter(new FileWriter("config/samplefile3.json", false))) {
             out.println(json);
         }
-        
+
         closeWriter(writer);
         
     }

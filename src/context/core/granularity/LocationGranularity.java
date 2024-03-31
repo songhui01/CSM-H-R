@@ -12,19 +12,20 @@ package context.core.granularity;
  * Conversion is needed for special calculations.
  */
 public class LocationGranularity {
+    
     public static final int CENTIMETER = 1;
     public static final int METER_1 = 1000;
     public static final int METER_10 = 10000;
     
     //
-    public static final String Building = "building";
-    public static final String District = "disrict";
-    public static final String Town = "town";
-    public static final String City = "city";
-    public static final String County = "county";
-    public static final String State = "state";
-    public static final String Country = "country";
-    public static final String Continent = "Continent";
+    public static final String BUILDING = "building";
+    public static final String DISTRICT = "disrict";
+    public static final String TOWN = "town";
+    public static final String CITY = "city";
+    public static final String COUNTY = "county";
+    public static final String STATE = "state";
+    public static final String COUNTRY = "country";
+    public static final String CONTINENT = "Continent";
 
     private LocationGranularity() {
     }

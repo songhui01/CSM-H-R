@@ -56,7 +56,6 @@ public class Generator {
     
     public Generator() {}
     
-    
     public static void generateIndexCombProbabilityMap(int number_of_g, String generator_collection_className, String[] condition_sequences) throws ClassNotFoundException, IllegalAccessException {
         number_of_groups = number_of_g;
         number_of_arrays = condition_sequences.length;

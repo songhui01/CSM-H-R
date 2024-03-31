@@ -18,7 +18,9 @@ import context.utility.measurement.ObjectSizeCalculator;
 
 public class BoomWithTripleListCASMhr {
 	public static void main(String args[]) throws JSONException, IOException{
-		
+                //init domain
+                DomainInitializationHR.init(6);
+                
 		JSONObject obj = JasonReader.readJson("config/samplefile3.json");
 		JSONArray a = obj.getJSONArray("infoListHR");
 		
@@ -33,11 +35,12 @@ public class BoomWithTripleListCASMhr {
 		//System.out.println(domainId);
 		ObjectMapper mapper = new ObjectMapper();
 		//JSON from file to Object
-		ContextDomain cd = mapper.readValue(new File("dataFiles/casmfile_domain_"+domainId+".json"), ContextDomain.class);
+		ContextDomain cd = mapper.readValue(new File("dataFiles2/casmfile_domain_"+domainId+".json"), ContextDomain.class);
 
 		Instant start = Instant.now();
 
-		cd=AssembleCSMs.assembleCASMhr(a, cd);
+		cd=AssembleCSMs.assembleCASMhrwithCondition(a, cd);
+		//cd=AssembleCSMs.assembleCASMhr(a, cd);
 		//cd=AssembleCSMs.assembleCASMCSSM(a, cd);
                 
                 // test the memory size
@@ -63,7 +66,7 @@ public class BoomWithTripleListCASMhr {
 		String json = ow.writeValueAsString(cd);
 		//System.out.print(json);
 		new File("dataFiles").mkdir();
-		try (FileWriter fileWriter = new FileWriter("datafiles/casmfile_domain_"+cd.getId()+".json")) {//cd.getDomainId()
+		try (FileWriter fileWriter = new FileWriter("datafiles2/casmfile_domain_"+cd.getId()+".json", false)) {//cd.getDomainId()
 			fileWriter.write(json);
 			System.out.println("Successfully Copied JSON Object to File...");
 		}

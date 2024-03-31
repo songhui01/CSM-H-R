@@ -27,6 +27,10 @@ public class ContextDomain extends Ontology{
         
 	private ContextRelationship cr = new ContextRelationship(); //for computing
 	private List<ContextCategory> ccl = new ArrayList<ContextCategory>(); //for modeling
+        
+        
+	//context situation state list for the whole domain, to be refactored to put into an embeddling related list object
+	private List<ContextSituationState> cssl_domain = new ArrayList<ContextSituationState>();
 	
 
 	public ContextDomain(){

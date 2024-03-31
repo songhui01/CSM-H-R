@@ -17,7 +17,11 @@ import context.core.RelationshipPair;
 
 public class RelationshipRegistration {
 	public static void main(String args[]) throws JSONException, IOException{
-		ObjectMapper mapper = new ObjectMapper();
+		register();
+	}
+        
+        public static void register() throws JSONException, IOException{
+            ObjectMapper mapper = new ObjectMapper();
 		//JSON from file to Object
 		//ContextDomain cd1 = mapper.readValue(new File("config/relationshipRegistration.json"), ContextDomain.class);
 		JSONObject obj = JasonReader.readJson("config/relationshipRegistration2.json");
@@ -88,6 +92,6 @@ public class RelationshipRegistration {
 			fileWriter.write(json);
 			System.out.println("Successfully Copied JSON Object to File...");
 		}
-	}
+        }
 
 }

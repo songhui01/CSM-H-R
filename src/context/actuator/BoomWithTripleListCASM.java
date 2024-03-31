@@ -17,7 +17,9 @@ import context.core.ContextDomain;
 
 public class BoomWithTripleListCASM {
 	public static void main(String args[]) throws JSONException, IOException{
-		
+		//init domain
+                DomainInitialization.init();
+                
 		JSONObject obj = JasonReader.readJson("config/samplefile2.json");
 		JSONArray a = obj.getJSONArray("infoList");
 		
@@ -56,7 +58,7 @@ public class BoomWithTripleListCASM {
 		String json = ow.writeValueAsString(cd);
 		//System.out.print(json);
 		new File("dataFiles").mkdir();
-		try (FileWriter fileWriter = new FileWriter("datafiles/casmfile_domain_"+5+".json")) {//cd.getDomainId()
+		try (FileWriter fileWriter = new FileWriter("datafiles/casmfile_domain_"+5+".json", false)) {//cd.getDomainId()
 			fileWriter.write(json);
 			System.out.println("Successfully Copied JSON Object to File...");
 		}

@@ -1,6 +1,7 @@
 package context.convertion;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,7 +30,6 @@ public class ConvertFileToClassToJson {
 		       // Parse line to extract individual fields
 		       String[] data = parseLine(line);
 
-		       // Create new Employee object
 		       Triple personLocation = new Triple();
 		       personLocation.setRID(data[0].trim());
 		       Subject subject = new Subject();
@@ -70,7 +70,6 @@ public class ConvertFileToClassToJson {
 		       // Parse line to extract individual fields
 		       String[] data = parseLine(line);
 
-		       // Create new Employee object
 		       Triple personLocation = new Triple();
 		       personLocation.setRID(data[0].trim());
 		       Subject subject = new Subject();
@@ -110,7 +109,6 @@ public class ConvertFileToClassToJson {
 		       // Parse line to extract individual fields
 		       String[] data = parseLine(line);
 
-		       // Create new Employee object
 		       Triple personLocation = new Triple();
 		       personLocation.setRID(data[0].trim());
 		       Subject subject = new Subject();
@@ -150,7 +148,6 @@ public class ConvertFileToClassToJson {
 		       // Parse line to extract individual fields
 		       String[] data = parseLine(line);
 
-		       // Create new Employee object
 		       Triple personLocation = new Triple();
 		       personLocation.setRID(data[0].trim());
 		       Subject subject = new Subject();
@@ -190,7 +187,6 @@ public class ConvertFileToClassToJson {
 		       // Parse line to extract individual fields
 		       String[] data = parseLine(line);
 
-		       // Create new Employee object
 		       Triple personLocation = new Triple();
 		       personLocation.setRID(data[0].trim());
 		       Subject subject = new Subject();
@@ -224,8 +220,6 @@ public class ConvertFileToClassToJson {
 		       }
 		    }
 		    System.out.println("this is 5");
-
-		    // Further process your Employee objects...
 		}
 		
 		UpperLevelInfo uli = new UpperLevelInfo();
@@ -243,7 +237,7 @@ public class ConvertFileToClassToJson {
 		String json = ow.writeValueAsString(uli);
 		//System.out.print(json);
 		
-		try (PrintWriter out = new PrintWriter("config/samplefile2.json")) {
+		try (PrintWriter out = new PrintWriter(new FileWriter("config/samplefile2.json", false))) {
 		    out.println(json);
 		}
 		Instant end = Instant.now();

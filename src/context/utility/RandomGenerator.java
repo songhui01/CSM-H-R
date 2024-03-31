@@ -45,8 +45,9 @@ public class RandomGenerator {
 		location.put("DINNINGHALL", "location05");
 		location.put("COFFEESHOP", "location06");
 		location.put("ElevatorBuilding", "location07");
-
-		BufferedWriter writer = new BufferedWriter(new FileWriter("config/samplefile1.txt"));
+                
+                // the second parameter false will decide to clear the content before writing new ones.
+		BufferedWriter writer = new BufferedWriter(new FileWriter("config/samplefile1.txt", false));
 		//System.out.println(randomIdentifier());
 		TimeHelper th = new TimeHelper("17-Jan-18 02:10:15");
 		PersonHelper50 ph = new PersonHelper50();
@@ -62,7 +63,7 @@ public class RandomGenerator {
 					 +", "+randomResult()		//decision
 					 +", "+it.next()			//action
 			 		 +", "+it.next()			//predicate URI
-	 		 		 +", "+"action"			//location type
+	 		 		 +", "+"action"			//action type
 					 +", "+it.next()	//location URI
 					 +", "+it.next()	//location NAME
 	 		 		 //+", "+"person"			//person type
